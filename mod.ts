@@ -17,8 +17,12 @@ type NameOption = string | {
 
     // Special names - not yet implemented
     married?: NameOption,
+
     older?: NameOption,
     younger?: NameOption,
+
+    forM?: NameOption,
+    forF?: NameOption,
 }
 
 type Translation = {
@@ -82,7 +86,10 @@ const names: Names = {
                         name: {
                             [Lang.ko]: {
                                 default: "사촌",
-                                older: "사촌형/오빠",
+                                older: {
+                                    forM: "사촌형",
+                                    forF: "사촌오빠",
+                                },
                                 younger: "사촌동생",
                             },
                             [Lang.en]: "cousin",
@@ -92,7 +99,10 @@ const names: Names = {
                         name: {
                             [Lang.ko]: {
                                 default: "사촌",
-                                older: "사촌언니/누나",
+                                older: {
+                                    forM: "사촌누나",
+                                    forF: "사촌언니",
+                                },
                                 younger: "사촌동생",
                             },
                             [Lang.en]: "cousin",
