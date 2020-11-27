@@ -8,21 +8,23 @@ enum BaseName {
     Mom,
     Brother,
     Sister,
-    Son,
-    Daughter,
+    Child,
 }
 
 type NameOption = string | {
     default?: NameOption,
 
     // Special names - not yet implemented
-    married?: NameOption,
+    m?: NameOption,
+    f?: NameOption,
 
     older?: NameOption,
     younger?: NameOption,
 
     forM?: NameOption,
     forF?: NameOption,
+
+    married?: NameOption,
 }
 
 type Translation = {
@@ -82,32 +84,25 @@ const names: Names = {
                     [Lang.en]: "uncle",
                 },
                 nodes: {
-                    [BaseName.Son]: {
+                    [BaseName.Child]: {
                         name: {
                             [Lang.ko]: {
                                 default: "사촌",
                                 older: {
-                                    forM: "사촌형",
-                                    forF: "사촌오빠",
+                                    m: {
+                                        forM: "사촌형",
+                                        forF: "사촌오빠",
+                                    },
+                                    f: {
+                                        forM: "사촌누나",
+                                        forF: "사촌언니",
+                                    },
                                 },
                                 younger: "사촌동생",
                             },
                             [Lang.en]: "cousin",
-                        },
-                    },
-                    [BaseName.Daughter]: {
-                        name: {
-                            [Lang.ko]: {
-                                default: "사촌",
-                                older: {
-                                    forM: "사촌누나",
-                                    forF: "사촌언니",
-                                },
-                                younger: "사촌동생",
-                            },
-                            [Lang.en]: "cousin",
-                        },
-                    },
+                        }
+                    }
                 }
             },
         }
