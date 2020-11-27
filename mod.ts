@@ -6,8 +6,7 @@ enum Lang {
 enum BaseName {
     Dad,
     Mom,
-    Brother,
-    Sister,
+    Sibling,
     Child,
 }
 
@@ -72,13 +71,19 @@ const names: Names = {
                     [Lang.en]: "grandmother",
                 }
             },
-            [BaseName.Brother]: {
+            [BaseName.Sibling]: {
                 name: {
                     [Lang.ko]: {
-                        default: "삼촌",
-                        married: {
-                            older: "큰아빠",
-                            younger: "작은아빠",
+                        default: "삼촌/고모",
+                        m: {
+                            default: "삼촌",
+                            married: {
+                                older: "큰아빠",
+                                younger: "작은아빠",
+                            },
+                        },
+                        f: {
+                            default: "고모",
                         },
                     },
                     [Lang.en]: "uncle",
