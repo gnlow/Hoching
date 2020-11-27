@@ -4,10 +4,10 @@ enum Lang {
 }
 
 enum BaseName {
-    Dad,
-    Mom,
-    Sibling,
-    Child,
+    Dad = "dad",
+    Mom = "mom",
+    Sibling = "sibling",
+    Child = "child",
 }
 
 export const Dad = BaseName.Dad
