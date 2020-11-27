@@ -12,15 +12,17 @@ enum BaseName {
     Daughter,
 }
 
-type Translation = {
-    [P in Lang]?: string | {
-        default: string,
+type NameOption = string | {
+    default?: NameOption,
 
-        // Special names - not yet implemented
-        married?: string,
-        older?: string,
-        younger?: string,
-    }
+    // Special names - not yet implemented
+    married?: NameOption,
+    older?: NameOption,
+    younger?: NameOption,
+}
+
+type Translation = {
+    [P in Lang]?: NameOption
 }
 
 
@@ -68,7 +70,10 @@ const names: Names = {
                 name: {
                     [Lang.ko]: {
                         default: "삼촌",
-                        married: "큰아버지/작은아버지",
+                        married: {
+                            older: "큰아빠",
+                            younger: "작은아빠",
+                        },
                     },
                     [Lang.en]: "uncle",
                 },
@@ -94,7 +99,7 @@ const names: Names = {
                         },
                     },
                 }
-            }
+            },
         }
     },
 }
