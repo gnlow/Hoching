@@ -3,6 +3,9 @@ enum Lang {
     en = "English",
 }
 
+export const KO = Lang.ko
+export const EN = Lang.en
+
 enum BaseName {
     Dad = "dad",
     Mom = "mom",
@@ -45,36 +48,36 @@ type Names = {
 export const names: Names = {
     [Dad]: {
         name: {
-            [Lang.ko]: "아빠",
-            [Lang.en]: "father",
+            [KO]: "아빠",
+            [EN]: "father",
         },
         [Dad]: {
             name: {
-                [Lang.ko]: "할아버지",
-                [Lang.en]: "grandfather",
+                [KO]: "할아버지",
+                [EN]: "grandfather",
             },
             [Dad]: {
                 name: {
-                    [Lang.ko]: "증조할아버지",
-                    [Lang.en]: "great-grandfather",
+                    [KO]: "증조할아버지",
+                    [EN]: "great-grandfather",
                 }
             },
             [Mom]: {
                 name: {
-                    [Lang.ko]: "증조할머니",
-                    [Lang.en]: "great-grandmother",
+                    [KO]: "증조할머니",
+                    [EN]: "great-grandmother",
                 }
             },
         },
         [Mom]: {
             name: {
-                [Lang.ko]: "할머니",
-                [Lang.en]: "grandmother",
+                [KO]: "할머니",
+                [EN]: "grandmother",
             }
         },
         [Sibling]: {
             name: {
-                [Lang.ko]: {
+                [KO]: {
                     default: "삼촌/고모",
                     m: {
                         default: "삼촌",
@@ -87,11 +90,11 @@ export const names: Names = {
                         default: "고모",
                     },
                 },
-                [Lang.en]: "uncle",
+                [EN]: "uncle",
             },
             [Child]: {
                 name: {
-                    [Lang.ko]: {
+                    [KO]: {
                         default: "사촌",
                         older: {
                             m: {
@@ -105,7 +108,7 @@ export const names: Names = {
                         },
                         younger: "사촌동생",
                     },
-                    [Lang.en]: "cousin",
+                    [EN]: "cousin",
                 }
             }
         },
