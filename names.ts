@@ -6,7 +6,7 @@ enum Lang {
 export const KO = Lang.ko
 export const EN = Lang.en
 
-enum BaseName {
+export enum BaseName {
     Dad = "dad",
     Mom = "mom",
     Sibling = "sibling",
@@ -34,16 +34,16 @@ type NameOption = string | {
     married?: NameOption,
 }
 
-type Translation = {
+export type Translation = {
     [P in Lang]?: NameOption
 }
 
 
-type Names = {
+export type Names = {
     [P in BaseName]?: Translation & Names
 }
 
-export const names: Names = {
+export const names: Required<Names> = {
     [Dad]: {
         [KO]: "아빠",
         [EN]: "father",
@@ -100,4 +100,9 @@ export const names: Names = {
             }
         },
     },
+    
+    // WIP
+    [Mom]:{},
+    [Sibling]:{},
+    [Child]:{}
 }
