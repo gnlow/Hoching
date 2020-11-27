@@ -10,6 +10,11 @@ enum BaseName {
     Child,
 }
 
+export const Dad = BaseName.Dad
+export const Mom = BaseName.Mom
+export const Sibling = BaseName.Sibling
+export const Child = BaseName.Child
+
 type NameOption = string | {
     default?: NameOption,
 
@@ -39,25 +44,25 @@ type Names = {
 }
 
 export const names: Names = {
-    [BaseName.Dad]: {
+    [Dad]: {
         name: {
             [Lang.ko]: "아빠",
             [Lang.en]: "father",
         },
         nodes: {
-            [BaseName.Dad]: {
+            [Dad]: {
                 name: {
                     [Lang.ko]: "할아버지",
                     [Lang.en]: "grandfather",
                 },
                 nodes: {
-                    [BaseName.Dad]: {
+                    [Dad]: {
                         name: {
                             [Lang.ko]: "증조할아버지",
                             [Lang.en]: "great-grandfather",
                         }
                     },
-                    [BaseName.Mom]: {
+                    [Mom]: {
                         name: {
                             [Lang.ko]: "증조할머니",
                             [Lang.en]: "great-grandmother",
@@ -65,13 +70,13 @@ export const names: Names = {
                     },
                 }
             },
-            [BaseName.Mom]: {
+            [Mom]: {
                 name: {
                     [Lang.ko]: "할머니",
                     [Lang.en]: "grandmother",
                 }
             },
-            [BaseName.Sibling]: {
+            [Sibling]: {
                 name: {
                     [Lang.ko]: {
                         default: "삼촌/고모",
@@ -89,7 +94,7 @@ export const names: Names = {
                     [Lang.en]: "uncle",
                 },
                 nodes: {
-                    [BaseName.Child]: {
+                    [Child]: {
                         name: {
                             [Lang.ko]: {
                                 default: "사촌",
