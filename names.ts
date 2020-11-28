@@ -75,11 +75,12 @@ export const names: Required<Names> = {
                         younger: "작은아빠",
                     },
                 },
-                f: {
-                    default: "고모",
-                },
+                f: "고모",
             },
-            [EN]: "uncle",
+            [EN]: {
+                m: "uncle",
+                f: "aunt",
+            },
 
             [Child]: {
                 [KO]: {
@@ -100,9 +101,119 @@ export const names: Required<Names> = {
             }
         },
     },
-    
-    // WIP
-    [Mom]:{},
-    [Sibling]:{},
-    [Child]:{}
+    [Mom]: {
+        [KO]: "엄마",
+        [EN]: "mother",
+
+        [Dad]: {
+            [KO]: "외할아버지",
+            [EN]: "grandfather",
+
+            [Dad]: {
+                [KO]: "외증조할아버지",
+                [EN]: "great-grandfather",
+            },
+            [Mom]: {
+                [KO]: "외증조할머니",
+                [EN]: "great-grandmother",
+            },
+        },
+        [Mom]: {
+            [KO]: "외할머니",
+            [EN]: "grandmother",
+        },
+        [Sibling]: {
+            [KO]: {
+                default: "외삼촌/이모",
+                m: "외삼촌",
+                f: "이모",
+            },
+            [EN]: {
+                m: "uncle",
+                f: "aunt",
+            },
+
+            [Child]: {
+                [KO]: {
+                    default: "사촌",
+                    older: {
+                        m: {
+                            forM: "사촌형",
+                            forF: "사촌오빠",
+                        },
+                        f: {
+                            forM: "사촌누나",
+                            forF: "사촌언니",
+                        },
+                    },
+                    younger: "사촌동생",
+                },
+                [EN]: "cousin",
+            }
+        },
+    },
+    [Sibling]:{
+        [KO]: {
+            m: {
+                default: "형제",
+                older: {
+                    forM: "형",
+                    forF: "오빠",
+                },
+                younger: "남동생",
+            },
+            f: {
+                default: "자매",
+                older: {
+                    forM: "누나",
+                    forF: "언니",
+                },
+                younger: "여동생",
+            },
+        },
+        [EN]: {
+            m: "brother",
+            f: "sister",
+        },
+
+        [Child]: {
+            [KO]: "조카",
+            [EN]: {
+                m: "nephew",
+                f: "niece",
+            },
+        }
+    },
+    [Child]:{
+        [KO]: {
+            m: "아들",
+            f: "딸",
+        },
+        [EN]: {
+            m: "son",
+            f: "daughter",
+        },
+        
+        [Child]: {
+            [KO]: {
+                m: "손자",
+                f: "손녀",
+            },
+            [EN]: {
+                m: "grandson",
+                f: "granddaughter",
+            },
+
+            [Child]: {
+                [KO]: {
+                    m: "증손자",
+                    f: "증손녀",
+                },
+                [EN]: {
+                    m: "great-grandson",
+                    f: "great-granddaughter"
+                },
+            }
+        }
+    }
 }
