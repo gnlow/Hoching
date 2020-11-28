@@ -18,7 +18,7 @@ export const Mom = BaseName.Mom
 export const Sibling = BaseName.Sibling
 export const Child = BaseName.Child
 
-type NameOption = string | {
+export type NameOption = string | {
     default?: NameOption,
 
     // Special names - not yet implemented

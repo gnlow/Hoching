@@ -6,14 +6,14 @@ import {
     Child,
 } from "./names.ts"
 
-enum Tag {
-    m,
-    f,
+export enum Tag {
+    m = "m",
+    f = "f",
     
-    older,
-    younger,
+    older = "older",
+    younger = "younger",
 
-    married,
+    married = "married",
 }
 
 export type NameInfo = [BaseName, ...Tag[]]
