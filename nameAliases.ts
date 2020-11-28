@@ -13,6 +13,9 @@ export enum Tag {
     older = "older",
     younger = "younger",
 
+    forM = "forM",
+    forF = "forF",
+
     married = "married",
 }
 

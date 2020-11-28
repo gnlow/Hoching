@@ -4,6 +4,7 @@ import {
     Names,
     names,
     Sibling,
+    Child,
 } from "./names.ts"
 
 import {
@@ -20,8 +21,28 @@ type FormatInfo = {
 
 class Relation {
     readonly info: NameInfo[]
-    constructor(info: NameInfo[][]) {
+    taggers: ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
+    constructor(
+        info: NameInfo[][],
+        taggers
+            : ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
+            = []
+    ) {
         this.info = info.flat()
+        this.taggers = [
+            // `forM`, `forF` tagger
+            ({tags}, i, l) => {
+                if (l[i - 1]) {
+                    tags.push(
+                        l[i - 1].tags.includes(Tag.m) 
+                            ? Tag.forM
+                            : Tag.forF
+                    )
+                }
+            },
+            // Custom taggers
+            ...taggers
+        ]
     }
     format() {
         let result: FormatInfo = []
@@ -33,14 +54,15 @@ class Relation {
                 pointer = next
                 lastTags = tags
             } else {
-                result.push({data: pointer, tags})
+                result.push({data: pointer, tags: lastTags})
                 pointer = names[name]
                 lastTags = tags
             }
         }
         result.push({data: pointer, tags: lastTags})
-        return result.map(({data, tags}) => {
+        return result.map(({data, tags}, i, l) => {
             const nameData = data.Korean as NameOption
+            this.taggers.forEach(tagger => tagger({data, tags}, i, l))
             const find = (nameData: NameOption, tags: Tag[]): string => {
                 if (typeof nameData == "string") {
                     return nameData
@@ -58,5 +80,7 @@ class Relation {
     }
 }
 
-const rel = new Relation([아빠(),[[Sibling, Tag.m, Tag.married, Tag.younger]]])
-console.log(rel.format()) // 작은아빠
+const rel = new Relation(
+    [아빠(), 아빠(), 엄마(), 아빠(), [[Sibling, Tag.m, Tag.married, Tag.younger]], [[Child, Tag.f, Tag.older]]]
+)
+console.log(rel.format()) // 증조할머니의 사촌언니
