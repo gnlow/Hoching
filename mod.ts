@@ -27,14 +27,18 @@ type FormatInfo = {
     tags: Tag[],
 }[]
 
+interface RelationOption {
+    taggers?: ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
+    me?: Tag[]
+}
+
 class Relation {
     readonly info: NameInfo[]
     taggers: ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
+    baseTags: Tag[]
     constructor(
         info: (NameAlias | NameInfo[])[],
-        taggers
-            : ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
-            = []
+        option: RelationOption = {taggers: [], me: []}
     ) {
         this.info = info.map(n => {
             if (typeof n == "function") {
@@ -43,19 +47,18 @@ class Relation {
                 return n
             }
         }).flat()
+        this.baseTags = option.me || []
         this.taggers = [
             // `forM`, `forF` tagger
             ({tags}, i, l) => {
-                if (l[i - 1]) {
-                    tags.push(
-                        l[i - 1].tags.includes(Tag.m) 
-                            ? Tag.forM
-                            : Tag.forF
-                    )
+                if ((l[i - 1]?.tags || this.baseTags).includes(Tag.m)) {
+                    tags.push(Tag.forM)
+                } else if ((l[i - 1]?.tags || this.baseTags).includes(Tag.f)) {
+                    tags.push(Tag.forF)
                 }
             },
             // Custom taggers
-            ...taggers
+            ...(option.taggers || [])
         ]
     }
     format() {
@@ -97,11 +100,9 @@ class Relation {
 const rel = new Relation(
     [
         아빠,
-        아빠,
-        엄마,
-        아빠,
-        형제자매 (남, 기혼),
-        자녀 (여, 연상),
-    ]
+        형제자매 (여, 연상),
+        자녀 (남, 연상)
+    ],
+    {me: [여]}
 )
-console.log(rel.format()) // 증조할머니의 사촌언니
+console.log(rel.format()) // 사촌오빠

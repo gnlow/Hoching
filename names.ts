@@ -78,6 +78,7 @@ export const names: Required<Names> = {
                 f: "고모",
             },
             [EN]: {
+                default: "uncle/aunt",
                 m: "uncle",
                 f: "aunt",
             },
@@ -129,6 +130,7 @@ export const names: Required<Names> = {
                 f: "이모",
             },
             [EN]: {
+                default: "uncle/aunt",
                 m: "uncle",
                 f: "aunt",
             },
@@ -157,6 +159,7 @@ export const names: Required<Names> = {
             m: {
                 default: "형제",
                 older: {
+                    default: "형/오빠",
                     forM: "형",
                     forF: "오빠",
                 },
@@ -165,6 +168,7 @@ export const names: Required<Names> = {
             f: {
                 default: "자매",
                 older: {
+                    default: "누나/언니",
                     forM: "누나",
                     forF: "언니",
                 },
@@ -172,6 +176,7 @@ export const names: Required<Names> = {
             },
         },
         [EN]: {
+            default: "sibling",
             m: "brother",
             f: "sister",
         },
@@ -179,6 +184,7 @@ export const names: Required<Names> = {
         [Child]: {
             [KO]: "조카",
             [EN]: {
+                default: "nephew/niece",
                 m: "nephew",
                 f: "niece",
             },
@@ -186,30 +192,36 @@ export const names: Required<Names> = {
     },
     [Child]:{
         [KO]: {
+            default: "자녀",
             m: "아들",
             f: "딸",
         },
         [EN]: {
+            default: "child",
             m: "son",
             f: "daughter",
         },
         
         [Child]: {
             [KO]: {
+                default: "손주",
                 m: "손자",
                 f: "손녀",
             },
             [EN]: {
+                default: "grandchild",
                 m: "grandson",
                 f: "granddaughter",
             },
 
             [Child]: {
                 [KO]: {
+                    default: "증손주",
                     m: "증손자",
                     f: "증손녀",
                 },
                 [EN]: {
+                    default: "great-grandchild",
                     m: "great-grandson",
                     f: "great-granddaughter"
                 },
