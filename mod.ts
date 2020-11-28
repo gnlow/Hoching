@@ -9,6 +9,7 @@ import {
 
 import {
     NameInfo,
+    NameAlias,
     Tag,
     아빠,
     엄마,
@@ -23,12 +24,18 @@ class Relation {
     readonly info: NameInfo[]
     taggers: ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
     constructor(
-        info: NameInfo[][],
+        info: (NameAlias | NameInfo[])[],
         taggers
             : ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
             = []
     ) {
-        this.info = info.flat()
+        this.info = info.map(n => {
+            if (typeof n == "function") {
+                return n()
+            } else {
+                return n
+            }
+        }).flat()
         this.taggers = [
             // `forM`, `forF` tagger
             ({tags}, i, l) => {
@@ -81,6 +88,6 @@ class Relation {
 }
 
 const rel = new Relation(
-    [아빠(), 아빠(), 엄마(), 아빠(), [[Sibling, Tag.m, Tag.married, Tag.younger]], [[Child, Tag.f, Tag.older]]]
+    [아빠, 아빠, 엄마, 아빠, [[Sibling, Tag.m, Tag.married, Tag.younger]], [[Child, Tag.f, Tag.older]]]
 )
 console.log(rel.format()) // 증조할머니의 사촌언니
