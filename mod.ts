@@ -13,6 +13,13 @@ import {
     Tag,
     아빠,
     엄마,
+    형제자매,
+    자녀,
+    남,
+    여,
+    연상,
+    연하,
+    기혼,
 } from "./nameAliases.ts"
 
 type FormatInfo = {
@@ -88,6 +95,13 @@ class Relation {
 }
 
 const rel = new Relation(
-    [아빠, 아빠, 엄마, 아빠, [[Sibling, Tag.m, Tag.married, Tag.younger]], [[Child, Tag.f, Tag.older]]]
+    [
+        아빠,
+        아빠,
+        엄마,
+        아빠,
+        형제자매 (남, 기혼),
+        자녀 (여, 연상),
+    ]
 )
 console.log(rel.format()) // 증조할머니의 사촌언니
