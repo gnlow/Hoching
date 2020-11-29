@@ -15,6 +15,7 @@ import {
     엄마,
     형제자매,
     자녀,
+    나,
     남,
     여,
     연상,
@@ -124,11 +125,6 @@ const rel = new Relation(
         형제자매 (40, 여),
         자녀 (8, 남)
     ],
-    {me: 
-        {
-            tags: [여],
-            age: 6,
-        }
-    }
+    {me: 나(6, 여)}
 )
 console.log(rel.format()) // 사촌오빠

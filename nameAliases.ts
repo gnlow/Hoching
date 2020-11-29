@@ -59,3 +59,5 @@ export const 아빠 = nameAliases.아빠
 export const 엄마 = nameAliases.엄마
 export const 형제자매 = nameAliases.형제자매
 export const 자녀 = nameAliases.자녀
+
+export const 나 = (age?: number, ...tags: Tag[]) => ({tags, age})
