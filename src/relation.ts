@@ -15,6 +15,7 @@ type FormatInfo = {
     data: Translation & Names,
     tags: Tag[],
     age?: number,
+    prev: Base,
 }[]
 
 interface Base {
@@ -45,6 +46,14 @@ export default class Relation {
         })
         this.base = option.me || {tags: []}
         this.taggers = [
+            /* 
+                나->아빠->형제 ==
+                나   ->  삼촌
+                         ^^^ : item (현재 항목)
+                    ^^^      : prev (직전 항목)
+                ^^^          : l[i - 1] (묶은 이후의 직전 항목)
+            */
+
             // `forM`, `forF` tagger
             ({tags}, i, l) => {
                 if ((l[i - 1]?.tags || this.base.tags).includes(Tag.m)) {
@@ -64,6 +73,17 @@ export default class Relation {
                     }
                 }
             },
+            // `olderPrev`, `youngerPrev` tagger
+            ({tags, age, prev}) => {
+                const prevAge = prev.age || this.base.age
+                if (age && prevAge) {
+                    if (age > prevAge) {
+                        tags.push(Tag.olderPrev)
+                    } else if (age < prevAge) {
+                        tags.push(Tag.youngerPrev)
+                    }
+                }
+            },
             // Custom taggers
             ...(option.taggers || [])
         ]
@@ -71,25 +91,25 @@ export default class Relation {
     format() {
         let result: FormatInfo = []
         let pointer: Names = names
-        let lastTags: Tag[] = []
-        let lastAge: number | undefined
+        let prev: Base = {tags: []}
+        let last: Base = {tags: []}
         for (let {baseName: name, tags, age} of this.info) {
             const next = pointer[name]
             if (next) {
                 pointer = next
-                lastTags = tags
-                lastAge = age
+                prev = last
+                last = {tags, age}
             } else {
-                result.push({data: pointer, tags: lastTags, age: lastAge})
+                result.push({data: pointer, ...last, prev})
                 pointer = names[name]
-                lastTags = tags
-                lastAge = age
+                prev = last
+                last = {tags, age}
             }
         }
-        result.push({data: pointer, tags: lastTags, age: lastAge})
-        return result.map(({data, tags, age}, i, l) => {
+        result.push({data: pointer, ...last, prev})
+        return result.map(({data, tags, age, prev}, i, l) => {
             const nameData = data.Korean as NameOption
-            this.taggers.forEach(tagger => tagger({data, tags, age}, i, l))
+            this.taggers.forEach(tagger => tagger({data, tags, age, prev}, i, l))
             const find = (nameData: NameOption, tags: Tag[]): string => {
                 if (typeof nameData == "string") {
                     return nameData

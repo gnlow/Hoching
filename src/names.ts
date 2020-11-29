@@ -1,3 +1,5 @@
+import type { Tag } from "./nameAliases.ts"
+
 enum Lang {
     ko = "Korean",
     en = "English",
@@ -18,21 +20,7 @@ export const Mom = BaseName.Mom
 export const Sibling = BaseName.Sibling
 export const Child = BaseName.Child
 
-export type NameOption = string | {
-    default?: NameOption,
-
-    // Special names - not yet implemented
-    m?: NameOption,
-    f?: NameOption,
-
-    older?: NameOption,
-    younger?: NameOption,
-
-    forM?: NameOption,
-    forF?: NameOption,
-
-    married?: NameOption,
-}
+export type NameOption = string | {default?: NameOption} & {[P in Tag]?: NameOption}
 
 export type Translation = {
     [P in Lang]?: NameOption
@@ -72,8 +60,8 @@ export const names: Required<Names> = {
                     default: "삼촌",
                     married: {
                         default: "큰아빠/작은아빠",
-                        older: "큰아빠",
-                        younger: "작은아빠",
+                        olderPrev: "큰아빠",
+                        youngerPrev: "작은아빠",
                     },
                 },
                 f: "고모",

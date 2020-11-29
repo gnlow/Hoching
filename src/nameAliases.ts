@@ -13,6 +13,9 @@ export enum Tag {
     older = "older",
     younger = "younger",
 
+    olderPrev = "olderPrev",
+    youngerPrev = "youngerPrev",
+
     forM = "forM",
     forF = "forF",
 
@@ -51,8 +54,6 @@ export const nameAliases: Record<string, NameAlias> = {
 
 export const 남 = Tag.m
 export const 여 = Tag.f
-export const 연상 = Tag.older
-export const 연하 = Tag.younger
 export const 기혼 = Tag.married
 
 export const 아빠 = nameAliases.아빠
