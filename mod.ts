@@ -37,7 +37,7 @@ class Relation {
     taggers: ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
     baseTags: Tag[]
     constructor(
-        info: (NameAlias | NameInfo[])[],
+        info: (NameAlias | NameInfo)[],
         option: RelationOption = {taggers: [], me: []}
     ) {
         this.info = info.map(n => {
@@ -46,7 +46,7 @@ class Relation {
             } else {
                 return n
             }
-        }).flat()
+        })
         this.baseTags = option.me || []
         this.taggers = [
             // `forM`, `forF` tagger
@@ -65,7 +65,7 @@ class Relation {
         let result: FormatInfo = []
         let pointer: Names = names
         let lastTags: Tag[] = []
-        for (let [name, ...tags] of this.info) {
+        for (let {baseName: name, tags} of this.info) {
             const next = pointer[name]
             if (next) {
                 pointer = next

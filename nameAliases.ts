@@ -19,14 +19,29 @@ export enum Tag {
     married = "married",
 }
 
-export type NameInfo = [BaseName, ...Tag[]]
-export type NameAlias = (...param: any[]) => NameInfo[]
+export interface NameInfo {
+    baseName: BaseName
+    tags: Tag[]
+}
+export type NameAlias = (...param: any[]) => NameInfo
 
 export const nameAliases: Record<string, NameAlias> = {
-    아빠: () => [[Dad, Tag.m]],
-    엄마: () => [[Mom, Tag.f]],
-    형제자매: (...tags: Tag[]) => [[Sibling, ...tags]],
-    자녀: (...tags: Tag[]) => [[Child, ...tags]],
+    아빠: () => ({
+        baseName: Dad,
+        tags: [Tag.m],
+    }),
+    엄마: () => ({
+        baseName: Mom,
+        tags: [Tag.f],
+    }),
+    형제자매: (...tags: Tag[]) => ({
+        baseName: Sibling,
+        tags,
+    }),
+    자녀: (...tags: Tag[]) => ({
+        baseName: Child,
+        tags,
+    }),
 }
 
 export const 남 = Tag.m
