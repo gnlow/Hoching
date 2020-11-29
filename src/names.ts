@@ -71,6 +71,7 @@ export const names: Required<Names> = {
                 m: {
                     default: "삼촌",
                     married: {
+                        default: "큰아빠/작은아빠",
                         older: "큰아빠",
                         younger: "작은아빠",
                     },
