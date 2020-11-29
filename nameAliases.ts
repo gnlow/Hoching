@@ -21,26 +21,31 @@ export enum Tag {
 
 export interface NameInfo {
     baseName: BaseName
-    tags: Tag[]
+    tags: Tag[],
+    age?: number,
 }
-export type NameAlias = (...param: any[]) => NameInfo
+export type NameAlias = (age?: number, ...param: any[]) => NameInfo
 
 export const nameAliases: Record<string, NameAlias> = {
-    아빠: () => ({
+    아빠: (age?: number) => ({
         baseName: Dad,
         tags: [Tag.m],
+        age,
     }),
-    엄마: () => ({
+    엄마: (age?: number) => ({
         baseName: Mom,
         tags: [Tag.f],
+        age,
     }),
-    형제자매: (...tags: Tag[]) => ({
+    형제자매: (age?: number, ...tags: Tag[]) => ({
         baseName: Sibling,
         tags,
+        age,
     }),
-    자녀: (...tags: Tag[]) => ({
+    자녀: (age?: number, ...tags: Tag[]) => ({
         baseName: Child,
         tags,
+        age,
     }),
 }
 
