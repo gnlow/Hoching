@@ -3,6 +3,7 @@ import {
     Translation,
     Names,
     names,
+    Lang,
 } from "./names.ts"
 
 import {
@@ -27,6 +28,11 @@ interface Base {
 interface RelationOption {
     taggers?: ((item: FormatInfo[number], index: number, list: FormatInfo) => any)[]
     me?: Base
+}
+
+const formatter = {
+    [Lang.ko]: (strs: string[]) => strs.join("의 "),
+    [Lang.en]: (strs: string[]) => strs.join("'s "),
 }
 
 export default class Relation {
@@ -88,7 +94,7 @@ export default class Relation {
             ...(option.taggers || [])
         ]
     }
-    format() {
+    format(lang: Lang = Lang.ko) {
         let result: FormatInfo = []
         let pointer: Names = names
         let prev: Base = {tags: []}
@@ -107,8 +113,8 @@ export default class Relation {
             }
         }
         result.push({data: pointer, ...last, prev})
-        return result.map(({data, tags, age, prev}, i, l) => {
-            const nameData = data.Korean as NameOption
+        const strs = result.map(({data, tags, age, prev}, i, l) => {
+            const nameData = data[lang] as NameOption
             this.taggers.forEach(tagger => tagger({data, tags, age, prev}, i, l))
             const find = (nameData: NameOption, tags: Tag[]): string => {
                 if (typeof nameData == "string") {
@@ -123,6 +129,7 @@ export default class Relation {
                 return nameData.default as string
             }
             return find(nameData, tags) || (nameData as any /* NameOption, Not string */).default
-        }).join("의 ")
+        })
+        return formatter[lang](strs)
     }
 }

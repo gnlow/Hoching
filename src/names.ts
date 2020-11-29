@@ -1,6 +1,6 @@
 import type { Tag } from "./nameAliases.ts"
 
-enum Lang {
+export enum Lang {
     ko = "Korean",
     en = "English",
 }

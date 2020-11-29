@@ -1,25 +1,25 @@
 import Relation, {
     아빠,
-    엄마,
     형제자매,
     자녀,
     나,
-
     남,
     여,
-
-    기혼,
+    KO,
+    EN,
 } from "../mod.ts"
 
 const relation = new Relation(
     [
-        아빠(38),
-        형제자매(40, 남, 기혼),
-        자녀(7, 여)
+        아빠(55),
+        형제자매(59, 남),
+        자녀(29, 여),
+        자녀(2, 여)
     ],
     {
-        me: 나(5, 남)
+        me: 나(24, 남)
     }
 )
 
-console.log(relation.format())
+console.log(relation.format(KO)) // 사촌누나의 딸
+console.log(relation.format(EN)) // cousin's daughter
