@@ -3,24 +3,12 @@ import {
     Translation,
     Names,
     names,
-    Sibling,
-    Child,
 } from "./names.ts"
 
 import {
     NameInfo,
     NameAlias,
     Tag,
-    아빠,
-    엄마,
-    형제자매,
-    자녀,
-    나,
-    남,
-    여,
-    연상,
-    연하,
-    기혼,
 } from "./nameAliases.ts"
 
 type FormatInfo = {
@@ -118,13 +106,3 @@ class Relation {
         }).join("의 ")
     }
 }
-
-const rel = new Relation(
-    [
-        아빠,
-        형제자매 (40, 여),
-        자녀 (8, 남)
-    ],
-    {me: 나(6, 여)}
-)
-console.log(rel.format()) // 사촌오빠
